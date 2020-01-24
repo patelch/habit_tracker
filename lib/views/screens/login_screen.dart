@@ -121,7 +121,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pushNamed(context, BottomNavigationBarController.id);
+                        Navigator.pushNamed(context, NavigationScreen.id);
                       },
                     ),
                   ),

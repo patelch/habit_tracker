@@ -1,12 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:habit_tracker/model/user.dart';
 
-class AuthenticationState extends Equatable {
-
-  @override
-  List<Object> get props => null;
-
-}
+abstract class AuthenticationState extends Equatable { }
 
 class Authenticated extends AuthenticationState {
 
@@ -26,5 +21,8 @@ class Unauthenticated extends AuthenticationState {
 
   @override
   String toString() => 'Unauthenticated';
+
+  @override
+  List<Object> get props => [];
 
 }

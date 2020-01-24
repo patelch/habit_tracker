@@ -1,21 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:habit_tracker/bloc/authentication_bloc/authentication_bloc.dart';
-import 'package:habit_tracker/bloc/authentication_bloc/authentication_event.dart';
-import 'package:habit_tracker/bloc/authentication_bloc/authentication_state.dart';
+import 'package:habit_tracker/bloc/authentication_bloc/authentication.dart';
+import 'package:habit_tracker/bloc/navigation_bar_bloc/navigation_bar.dart';
 import 'package:habit_tracker/data/user_repository.dart';
 import 'package:habit_tracker/views/screens/login_screen.dart';
 import 'package:habit_tracker/views/screens/navigation_screen.dart';
 import 'package:habit_tracker/views/screens/registration_screen.dart';
 
+import 'bloc/simple_bloc_delegate.dart';
+
 void main() {
+  BlocSupervisor.delegate = SimpleBlocDelegate();
   final UserRepository userRepository = UserRepository();
   runApp(
-    BlocProvider(
-      create: (context) => AuthenticationBloc(userRepository: userRepository)
-        ..add(AppStarted()),
-      child: MyApp(userRepository: userRepository,),
-    ),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthenticationBloc>(
+          create: (context) => AuthenticationBloc(userRepository: userRepository)
+            ..add(AppStarted()),
+        ),
+//        BlocProvider<NavigationBarBloc>(
+//          create: (context) => NavigationBarBloc(),
+//        ),
+      ],
+      child: MyApp(
+        userRepository: userRepository,
+      ),
+    )
+
   );
 }
 
@@ -32,7 +44,7 @@ class MyApp extends StatelessWidget {
       home: BlocBuilder<AuthenticationBloc, AuthenticationState> (
         builder: (context, state) {
           if (state is Authenticated) {
-            return BottomNavigationBarController(user: state.user);
+            return NavigationScreen(user: state.user);
           } else {
             return LoginScreen(userRepository: _userRepository);
           }
@@ -44,7 +56,7 @@ class MyApp extends StatelessWidget {
       routes: {
         LoginScreen.id: (context) => LoginScreen(userRepository: _userRepository),
         RegistrationScreen.id: (context) => RegistrationScreen(),
-        BottomNavigationBarController.id: (context) => BottomNavigationBarController(),
+        NavigationScreen.id: (context) => NavigationScreen(),
       },
     );
   }
