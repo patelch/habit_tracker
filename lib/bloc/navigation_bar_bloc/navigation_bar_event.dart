@@ -9,7 +9,7 @@ class NavigationTabTapped extends NavigationBarEvent {
   NavigationTabTapped({@required this.index});
 
   @override
-  List<Object> get props => null;
+  List<Object> get props => [index];
 
   @override
   String toString() => 'Tab index: $index';
