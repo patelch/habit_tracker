@@ -1,16 +1,16 @@
+import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class NavigationBarEvent extends Equatable {
+abstract class NavigationBarEvent extends Equatable { }
 
-}
-
-class NavigationBarItemTapped extends NavigationBarEvent {
-
+class NavigationTabTapped extends NavigationBarEvent {
   final int index;
 
-  NavigationBarItemTapped({ this.index });
+  NavigationTabTapped({@required this.index});
 
   @override
   List<Object> get props => [index];
 
+  @override
+  String toString() => 'Tab index: $index';
 }
