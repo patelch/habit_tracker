@@ -19,11 +19,17 @@ class FirebaseHabitsRepository implements HabitsRepository {
   }
 
   @override
-  Stream<List<Habit>> habits() {
-    return habitsCollection.snapshots().map((snapshot) {
-      return snapshot.documents
-          .map((document) => Habit.fromEntity(HabitEntity.fromSnapshot(document)))
+  Future<List<Habit>> habits(String day) {
+    return habitsCollection
+      .where("days", arrayContains: day)
+      .getDocuments()
+      .then((QuerySnapshot snapshot) {
+        return snapshot.documents
+          .map<Habit>((document) {
+            HabitEntity habitEntity = HabitEntity.fromSnapshot(document);
+            return Habit.fromEntity(habitEntity);
+          })
           .toList();
-    });
+      });
   }
 }

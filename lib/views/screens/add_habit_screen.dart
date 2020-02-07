@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habit_tracker/views/constants/colors.dart';
+import 'package:habit_tracker/views/constants/icons.dart';
 import 'package:line_icons/line_icons.dart';
 
 class AddHabitScreen extends StatelessWidget {
@@ -245,14 +246,6 @@ class _ActivityCategoryBarState extends State<ActivityCategoryBar> {
 
   int selectedIcon = -1;
 
-  List<Icon> _categoryIcons = [
-    Icon(LineIcons.bicycle),
-    Icon(LineIcons.book),
-    Icon(LineIcons.graduation_cap),
-    Icon(LineIcons.heartbeat),
-    Icon(LineIcons.smile_o)
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -264,7 +257,7 @@ class _ActivityCategoryBarState extends State<ActivityCategoryBar> {
   List<Widget> categoryButtons() {
     List<Widget> icons = [];
 
-    for (int i = 0; i < _categoryIcons.length; i++) {
+    for (int i = 0; i < categoryIcons.length; i++) {
       icons.add(
         Expanded(
           child: Container(
@@ -277,7 +270,9 @@ class _ActivityCategoryBarState extends State<ActivityCategoryBar> {
               color: selectedIcon == i ? Color(0xAA5FC3E4) : Colors.grey.shade200,
             ),
             child: IconButton(
-              icon: _categoryIcons[i],
+              icon: Icon(
+                categoryIcons[i],
+              ),
               onPressed: () {
                 setState(() {
                   if (selectedIcon == i) {

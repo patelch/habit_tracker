@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:habit_tracker/data/user_repository.dart';
 import 'package:habit_tracker/views/constants/colors.dart';
 import 'package:habit_tracker/views/constants/text_styles.dart';
 import 'package:habit_tracker/views/screens/navigation_screen.dart';
 import 'package:habit_tracker/views/screens/registration_screen.dart';
+import 'package:habits_repository/habits_repository.dart';
 
 class LoginScreen extends StatelessWidget {
 
-  final UserRepository _userRepository;
+  final UserRepository _userRepository = GetIt.instance<UserRepository>();
+  final HabitsRepository _habitsRepository = GetIt.instance<HabitsRepository>();
 
   static const String id = "login_screen";
 
   String email = "";
   String password = "";
-
-  LoginScreen({ @required userRepository }) : _userRepository = userRepository;
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +122,13 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pushNamed(context, NavigationScreen.id);
+                        Navigator.pushNamed(
+                          context,
+                          NavigationScreen.id,
+                          arguments: <String, HabitsRepository>{
+                            'habitsRepository': _habitsRepository,
+                          },
+                        );
                       },
                     ),
                   ),

@@ -10,22 +10,24 @@ class Habit extends Equatable {
   final String description;
   final List<String> days;
   final int icon;
+  final bool isCompleted;
 
-  Habit({ this.id, this.title, this.description, this.days, this.icon });
+  Habit({ this.id, this.title, this.description, this.days, this.icon, this.isCompleted });
 
-  Habit copyWith({ id, title, description, days, icon }) {
+  Habit copyWith({ id, title, description, days, icon, isCompleted }) {
     return Habit(
       id: id ?? this.id,
       title: title ?? this.title,
       description: description ?? this.description,
       days: days ?? this.days,
       icon: icon ?? this.icon,
+      isCompleted: isCompleted ?? this.isCompleted,
     );
   }
 
   @override
   String toString() {
-    return 'Habit { title: $title, description: $description, days: $days, icon: $icon, id: $id }';
+    return 'Habit { title: $title, description: $description, days: $days, icon: $icon, id: $id, isCompleted: $isCompleted }';
   }
 
   HabitEntity toEntity() {
@@ -39,6 +41,7 @@ class Habit extends Equatable {
       description: entity.description,
       icon: entity.icon,
       days: entity.days,
+      isCompleted: false,
     );
   }
 

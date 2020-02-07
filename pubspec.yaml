@@ -16,6 +16,10 @@ dependencies:
   firebase_auth: ^0.15.3+1
   equatable: ^1.0.2
   flutter_bloc: ^3.1.0
+  get_it: ^3.1.0
+  intl: ^0.16.1
+  habits_repository:
+    path: habits_repository
 
 dev_dependencies:
   flutter_test:
