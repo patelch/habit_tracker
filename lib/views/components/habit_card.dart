@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:habit_tracker/views/constants/colors.dart';
+import 'package:habit_tracker/views/constants/icons.dart';
+import 'package:habit_tracker/views/constants/text_styles.dart';
+import 'package:habits_repository/habits_repository.dart';
 import 'package:line_icons/line_icons.dart';
 
-class HabitCard extends StatefulWidget {
-  @override
-  _HabitCardState createState() => _HabitCardState();
-}
+class HabitCard extends StatelessWidget {
+  final Habit habit;
 
-class _HabitCardState extends State<HabitCard> {
+  HabitCard({this.habit});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,31 +24,22 @@ class _HabitCardState extends State<HabitCard> {
             child: Row(
               children: <Widget>[
                 Icon(
-                  LineIcons.bicycle,
+                  categoryIcons[habit.icon],
                   size: 30,
                   color: blueColor,
                 ),
-
                 SizedBox(
                   width: 20,
                 ),
-
                 Expanded(
                   child: Text(
-                    'Work out',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey.shade700,
-                    ),
+                    habit.title,
+                    style: habitCardTextStyle,
                   ),
                 ),
-
                 Text(
-                  '30 min',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey.shade700,
-                  ),
+                  habit.description,
+                  style: habitCardTextStyle,
                 ),
               ],
             ),

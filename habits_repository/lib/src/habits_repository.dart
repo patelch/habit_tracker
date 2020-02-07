@@ -8,6 +8,6 @@ abstract class HabitsRepository {
 
   Future<void> deleteHabit(Habit habit);
 
-  Stream<List<Habit>> habits();
+  Future<List<Habit>> habits(String day);
 
 }

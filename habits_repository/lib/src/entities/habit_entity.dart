@@ -37,10 +37,10 @@ class HabitEntity extends Equatable {
 
   static HabitEntity fromSnapshot(DocumentSnapshot snap) {
     return HabitEntity(
-      title: snap.data['title'],
-      description: snap.data['description'],
-      days: snap.data['days'],
-      icon: snap.data['icon'],
+      title: snap.data['title'] ?? "",
+      description: snap.data['description'] ?? "",
+      days: List.from(snap.data['days']),
+      icon: snap.data['icon'] ?? 0,
       id: snap.documentID,
     );
   }
